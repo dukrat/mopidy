@@ -176,7 +176,7 @@ These are the available audio configurations. For specific use cases, see
 .. confval:: audio/souphttpsrc_ssl-strict
 
     Sets the ssl-strict property on any souphttpsrc element used in the
-    pipeline. Defaults to``true``.
+    pipeline. Defaults to ``true``.
 
 
 Logging configuration
