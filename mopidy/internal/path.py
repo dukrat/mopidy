@@ -2,6 +2,7 @@ from __future__ import absolute_import, unicode_literals
 
 import logging
 import os
+import sys
 import stat
 import string
 import threading
@@ -133,8 +134,11 @@ def _find_worker(relative, follow, done, work, results, errors):
             if (st.st_dev, st.st_ino) in parents:
                 errors[path] = exceptions.FindError('Sym/hardlink loop found.')
                 continue
-
-            parents = parents + [(st.st_dev, st.st_ino)]
+            if sys.platform == 'win32':
+                if st.st_ino != 0:
+                    parents = parents + [(st.st_dev, st.st_ino)]
+            else
+                 parents = parents + [(st.st_dev, st.st_ino)]
             if stat.S_ISDIR(st.st_mode):
                 for e in os.listdir(entry):
                     work.put((os.path.join(entry, e), parents))
