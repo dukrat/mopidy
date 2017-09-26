@@ -547,6 +547,10 @@ class Audio(pykka.ThreadingActor):
         else:
             self._appsrc.reset()
 
+        if not self._config['audio']['souphttpsrc_ssl-strict']:
+            if source.get_factory().get_name() == 'souphttpsrc':
+                source.set_property('ssl-strict', False)
+
         utils.setup_proxy(source, self._config['proxy'])
 
     def set_uri(self, uri):
