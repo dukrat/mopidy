@@ -173,6 +173,11 @@ These are the available audio configurations. For specific use cases, see
     few seconds. The default is letting GStreamer decide the size, which at the
     time of this writing is 1000.
 
+.. confval:: audio/souphttpsrc_ssl-strict
+
+    Sets the ssl-strict property on any souphttpsrc element used in the
+    pipeline. Defaults to``true``.
+
 
 Logging configuration
 =====================
