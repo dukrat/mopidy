@@ -145,7 +145,7 @@ def _find_worker(relative, follow, done, work, results, errors):
             if sys.platform == 'win32':
                 if st.st_ino != 0:
                     parents = parents + [(st.st_dev, st.st_ino)]
-            else
+            else:
                  parents = parents + [(st.st_dev, st.st_ino)]
             if stat.S_ISDIR(st.st_mode):
                 for e in os.listdir(entry):
