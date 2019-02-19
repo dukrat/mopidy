@@ -7,6 +7,7 @@
 .coverage
 .idea
 .noseids
+.pytest_cache/
 .tox
 MANIFEST
 build/
@@ -14,6 +15,7 @@ cover/
 coverage.xml
 dist/
 docs/_build/
+docs/.doctrees/
 mopidy.log*
 nosetests.xml
 tmp/

@@ -73,14 +73,14 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 project = 'Mopidy'
-copyright = '2009-2017, Stein Magnus Jodal and contributors'
+copyright = '2009-2018, Stein Magnus Jodal and contributors'
 
 from mopidy.internal.versioning import get_version
 release = get_version()
 version = '.'.join(release.split('.')[:2])
 
 # To make the build reproducible, avoid using today's date in the manpages
-today = '2017'
+today = '2018'
 
 exclude_trees = ['_build']
 
@@ -136,7 +136,8 @@ extlinks = {
     'js': ('https://github.com/mopidy/mopidy.js/issues/%s', 'mopidy.js#'),
     'mpris': (
         'https://github.com/mopidy/mopidy-mpris/issues/%s', 'mopidy-mpris#'),
-    'discuss': ('https://discuss.mopidy.com/t/%s', 'discuss.mopidy.com/t/'),
+    'discuss': (
+        'https://discourse.mopidy.com/t/%s', 'discourse.mopidy.com/t/'),
 }
 
 

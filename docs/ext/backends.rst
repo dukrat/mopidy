@@ -65,6 +65,15 @@ https://github.com/tkem/mopidy-dleyna
 Provides a backend for playing music from Digital Media Servers using
 the `dLeyna <https://01.org/dleyna>`_ D-Bus interface.
 
+
+Mopidy-Emby
+===========
+
+https://github.com/xsteadfastx/mopidy-emby
+
+Provides a backend for playing music from `Emby Media Servers <https://emby.media>`_.
+
+
 Mopidy-File
 ===========
 
@@ -164,6 +173,15 @@ Extension for listening to Internet radio stations and podcasts listed at
 `radio.fr <http://www.radio.fr/>`_, and `radio.at <http://www.radio.at/>`_.
 
 
+Mopidy-RNZ
+==========
+
+https://github.com/danbrough/mopidy-rnz
+
+Extension for playing `Radio New Zealands <http://www.radionz.co.nz>`_
+podcasts,live streams and latest news bulletin.
+
+
 Mopidy-SomaFM
 =============
 
@@ -232,6 +250,15 @@ https://github.com/sibuser/mopidy-vkontakte
 
 Provides a backend for playing music from the `VKontakte social network
 <http://vk.com/>`_.
+
+
+Mopidy-YDisk
+============
+
+https://github.com/vonZeppelin/mopidy-ydisk
+
+Provides a backend for playing music from `Yandex.Disk cloud storage
+<https://disk.yandex.ru/>`_.
 
 
 Mopidy-YouTube

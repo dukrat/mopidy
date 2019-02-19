@@ -5,13 +5,95 @@ Changelog
 This changelog is used to track all major changes to Mopidy.
 
 
-v2.1.1 (UNRELEASED)
+v2.2.2 (2018-12-29)
 ===================
 
 Bug fix release.
 
+- HTTP: Fix hang on exit due to change in Tornado v5.0 IOLoop. (Fixes:
+  :issue:`1715`, PR: :issue:`1716`)
+
+- Files: Fix crash due to mix of text and bytes in paths that come from
+  ``$XDG_CONFIG_HOME/user-dirs.dirs``. (Fixes: :issue:`1676`, :issue:`1725`)
+
+
+v2.2.1 (2018-10-15)
+===================
+
+Bug fix release.
+
+- HTTP: Stop blocking connections where the network location part of the
+  ``Origin`` header is empty, such as WebSocket connections originating from
+  local files. (Fixes: :issue:`1711`, PR: :issue:`1712`)
+
+- HTTP: Add new config value :confval:`http/csrf_protection` which enables all
+  CSRF protections introduced in Mopidy 2.2.0. It is enabled by default and
+  should only be disabled by those users who are unable to set a
+  ``Content-Type: application/json`` request header or cannot utilise the
+  :confval:`http/allowed_origins` config value. (Fixes: :issue:`1713`, PR:
+  :issue:`1714`)
+
+
+v2.2.0 (2018-09-30)
+===================
+
+Mopidy 2.2.0, a feature release, is out. It is a quite small release, featuring
+mostly minor fixes and improvements.
+
+Most notably, this release introduces CSRF protection for both the HTTP and
+WebSocket RPC interfaces, and improves the file path checking in the M3U
+backend. The CSRF protection should stop attacks against local Mopidy servers
+from malicious websites, like what was demonstrated by Josef Gajdusek in
+:issue:`1659`.
+
+Since the release of 2.1.0, we've closed approximately 21 issues and pull
+requests through 133 commits by 22 authors.
+
+- Dependencies: Drop support for Tornado < 4.4. Though strictly a breaking
+  change, this shouldn't affect any supported systems as even Debian stable
+  includes Tornado >= 4.4.
+
+- Core: Remove upper limit of 10000 tracks in tracklist. 10000 tracks is still
+  the default limit as some MPD clients crash if the tracklist is longer, but
+  it is now possible to set the :confval:`core/max_tracklist_length` config
+  value as high as you want to. (Fixes: :issue:`1600`, PR: :issue:`1666`)
+
+- Core: Fix crash on ``library.lookup(uris=[])``. (Fixes: :issue:`1619`, PR:
+  :issue:`1620`)
+
+- Core: Define return value of ``playlists.delete()`` to be a bool, :class:`True`
+  on success, :class:`False` otherwise. (PR: :issue:`1702`)
+
+- M3U: Ignore all attempts at accessing files outside the
+  :confval:`m3u/playlist_dir`. (Partly fixes: :issue:`1659`, PR: :issue:`1702`)
+
+- File: Change default ordering to show directories first, then files. (PR:
+  :issue:`1595`)
+
+- File: Fix extraneous encoding of path. (PR: :issue:`1611`)
+
+- HTTP: Protect RPC and WebSocket interfaces against CSRF by blocking requests
+  that originate from servers other than those specified in the new config
+  value :confval:`http/allowed_origins`. An artifact of this is that all
+  JSON-RPC requests must now always set the header
+  ``Content-Type: application/json``.
+  (Partly fixes: :issue:`1659`, PR: :issue:`1668`)
+
 - MPD: Added ``idle`` to the list of available commands.
   (Fixes: :issue:`1593`, PR: :issue:`1597`)
+
+- MPD: Added Unix domain sockets for binding MPD to.
+  (Fixes: :issue:`1531`, PR: :issue:`1629`)
+
+- MPD: Lookup track metadata for MPD ``load`` and ``listplaylistinfo``.
+  (Fixes: :issue:`1511`, PR: :issue:`1621`)
+
+- Ensure that decoding of OS errors with unknown encoding never crashes, but
+  instead replaces unknown bytes with a replacement marker. (Fixes:
+  :issue:`1599`)
+
+- Set GLib program and application name, so that we show up as "Mopidy" in
+  PulseAudio instead of "python ...". (PR: :issue:`1626`)
 
 
 v2.1.0 (2017-01-02)
