@@ -24,6 +24,10 @@ logger = logging.getLogger(__name__)
 
 
 def main():
+    if sys.platform == 'win32':
+        import asyncio
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
     log.bootstrap_delayed_logging()
     logger.info(f"Starting Mopidy {versioning.get_version()}")
 

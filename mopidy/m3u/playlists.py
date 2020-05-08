@@ -36,6 +36,9 @@ def replace(path, mode="w+b", encoding=None, errors=None):
         yield fp
         fp.flush()
         os.fsync(fd)
+        fp.close()
+        if os.path.isfile(path):
+            os.remove(path)
         tempname.rename(path)
     except Exception:
         tempname.unlink()
@@ -140,6 +143,8 @@ class M3UPlaylistsProvider(backend.PlaylistsProvider):
                 orig_path = path
                 path = translator.path_from_name(playlist.name.strip())
                 path = path.with_suffix(orig_path.suffix)
+                if os.path.isfile(self._abspath(path)):
+                    os.remove(self._abspath(path))
                 self._abspath(orig_path).rename(self._abspath(path))
             mtime = self._abspath(path).stat().st_mtime
         except OSError as e:
