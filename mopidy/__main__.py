@@ -24,8 +24,9 @@ logger = logging.getLogger(__name__)
 
 
 def main():
-    if sys.platform == 'win32':
+    if sys.platform == "win32":
         import asyncio
+
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
     log.bootstrap_delayed_logging()
@@ -55,14 +56,12 @@ def main():
                 root_cmd.add_child(data.extension.ext_name, data.command)
 
         args = root_cmd.parse(sys.argv[1:])
-
         config, config_errors = config_lib.load(
             args.config_files,
             [d.config_schema for d in extensions_data],
             [d.config_defaults for d in extensions_data],
             args.config_overrides,
         )
-
         create_core_dirs(config)
         create_initial_config_file(args, extensions_data)
 

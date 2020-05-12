@@ -62,13 +62,15 @@ def uri_to_path(uri):
     """
     Convert an URI to a OS specific path.
     """
-    if uri.startswith("file:"):
+    if re.match("^file:///[a-zA-Z]:.*", uri) is not None:
         _, netloc, path, _, _ = urllib.parse.urlsplit(uri)
         if netloc:
             netloc = "\\\\" + netloc
         return pathlib.Path(urllib.request.url2pathname(netloc + path))
     else:
-        bytes_path = urllib.parse.unquote_to_bytes(urllib.parse.urlsplit(uri).path)
+        bytes_path = urllib.parse.unquote_to_bytes(
+            urllib.parse.urlsplit(uri).path
+        )
         unicode_path = bytes_path.decode(errors="surrogateescape")
         return pathlib.Path(unicode_path)
 

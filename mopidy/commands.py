@@ -28,7 +28,7 @@ DEFAULT_CONFIG = ":".join(map(str, _default_config))
 
 
 def config_files_type(value):
-    return re.split(":(?!\\\)", value)
+    return re.split(":(?!\\\\)", value)
 
 
 def config_override_type(value):
@@ -304,11 +304,10 @@ class RootCommand(Command):
             loop.quit()
 
         loop = GLib.MainLoop()
-        if sys.platform != 'win32':
+        if sys.platform != "win32":
             GLib.unix_signal_add(
                 GLib.PRIORITY_DEFAULT, signal.SIGTERM, on_sigterm, loop
             )
-
         mixer_class = self.get_mixer_class(config, args.registry["mixer"])
         backend_classes = args.registry["backend"]
         frontend_classes = args.registry["frontend"]
